@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }}</title>
+    <style>
+        /* General styles */
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.payment-section {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+.total-amount p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.total-amount span {
+    font-weight: bold;
+    color: #1c87c9;
+}
+
+/* Stripe Elements */
+#card-element {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+#card-element input {
+    font-family: 'Helvetica Neue', sans-serif;
+}
+
+#card-errors {
+    color: #fa755a;
+    margin-top: 10px;
+}
+
+/* Pay button styles */
+.pay-btn {
+    background-color: #1c87c9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    text-align: center;
+}
+
+.pay-btn:hover {
+    background-color: #155d8a;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 480px) {
+    .payment-section {
+        width: 100%;
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="payment-section">
+        <h2>Toʻlov Ma'lumotlari</h2>
+        <div class="total-amount">
+            <p>Jami Toʻlov: <span>{{ product.price }} soʻm</span></p>
+        </div>
+        <!-- Payment form -->
+        <form id="payment-form">
+            <input type="hidden" id="product-price" value="{{ product.price }}">
+            <div id="card-element">
+                <!-- A Stripe Element will be inserted here. -->
+            </div>
+            <button type="submit" class="pay-btn">Toʻlash</button>
+            <!-- Error message -->
+            <div id="card-errors" role="alert"></div>
+        </form>
+    </div>
+
+    <!-- Stripe JS library -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>// Set up Stripe.js and Elements to use in checkout form
+        var stripe = Stripe('sk_test_51Q147CHP1g8uINnK3oX8EJjItvBVVomP12TmBFlwCDxzNi62LLbAo9oSkLKbWSS37XPz9CqzPcmraZCEw5uHTkKl00lYjNhFvC'); // Add your Stripe public key here
+        var elements = stripe.elements();
+        
+        var style = {
+          base: {
+            color: "#32325d",
+            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+            fontSmoothing: "antialiased",
+            fontSize: "16px",
+            "::placeholder": {
+              color: "#aab7c4"
+            }
+          },
+          invalid: {
+            color: "#fa755a",
+            iconColor: "#fa755a"
+          }
+        };
+        
+        var card = elements.create("card", { style: style });
+        card.mount("#card-element");
+        
+        // Handle real-time validation errors from the card Element.
+        card.on('change', function(event) {
+          var displayError = document.getElementById('card-errors');
+          if (event.error) {
+            displayError.textContent = event.error.message;
+          } else {
+            displayError.textContent = '';
+          }
+        });
+        
+        // Handle form submission
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function(event) {
+          event.preventDefault();
+        
+          stripe.createToken(card).then(function(result) {
+            if (result.error) {
+              // Inform the user if there was an error.
+              var errorElement = document.getElementById('card-errors');
+              errorElement.textContent = result.error.message;
+            } else {
+              // Get the product price from the form
+              var productPrice = document.getElementById('product-price').value;
+        
+              // Send the token and product price to your server.
+              stripeTokenHandler(result.token, productPrice);
+            }
+          });
+        });
+        
+        // Submit the token and other form data to your server
+        function stripeTokenHandler(token, price) {
+          // Insert the token ID and price into the form so it gets submitted to the server
+          var form = document.getElementById('payment-form');
+          var hiddenInput = document.createElement('input');
+          hiddenInput.setAttribute('type', 'hidden');
+          hiddenInput.setAttribute('name', 'stripeToken');
+          hiddenInput.setAttribute('value', token.id);
+          form.appendChild(hiddenInput);
+        
+          var priceInput = document.createElement('input');
+          priceInput.setAttribute('type', 'hidden');
+          priceInput.setAttribute('name', 'price');
+          priceInput.setAttribute('value', price);
+          form.appendChild(priceInput);
+        
+          // Submit the form
+          form.submit();
+        }
+        </script>
+</body>
+</html>

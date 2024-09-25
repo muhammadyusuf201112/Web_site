@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .header-container {
+            background-color: #fff;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #7c3aed;
+        }
+
+        .location {
+            font-size: 14px;
+        }
+
+        .options a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #555;
+        }
+
+        .product-page {
+            display: flex;
+            margin: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-images {
+            width: 30%;
+            margin-right: 20px;
+        }
+
+        .main-image {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .thumbnail-images img {
+            width: 80px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .product-details {
+            width: 70%;
+        }
+
+        .product-details h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .current-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e91e63;
+            margin-right: 10px;
+        }
+
+        .old-price {
+            font-size: 14px;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .badge {
+            background-color: #ff9800;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+
+        .quantity-control {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-control button {
+            padding: 5px 10px;
+            background-color: #eee;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .quantity-control input {
+            width: 50px;
+            text-align: center;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+        }
+
+        .add-to-cart,
+        .buy-now {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #7c3aed;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .add-to-cart:hover,
+        .buy-now:hover {
+            background-color: #5a1fa2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">Toshiba</div>
+            <div class="location">Shahar: <span>Toshkent</span></div>
+            <div class="options">
+                <a href="#">Qabul qilish punktlari</a>
+                <a href="#">Sevimlilar</a>
+                <a href="#">Savat</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="product-page">
+            <div class="product-images">
+                <img src="{{products.images.url}}" alt="Product Image" class="main-image">
+                <div class="thumbnail-images">
+                    <img src="{{products.images.url}}" alt="Thumbnail 1">
+                </div>
+            </div>
+
+            <div class="product-details">
+                <h1>{product.name}</h1>
+                <p>Sotuvchi: <strong>Reckitt Benckiser</strong></p>
+
+                <div class="product-price">
+                    <span class="current-price">{product.price} so'm</span>
+                    <span class="old-price">{product.is_sale} so'm</span>
+                    <span class="badge">Past narxlar</span>
+                </div>
+
+                <div class="quantity-control">
+                    <label for="quantity">Miqdori:{product.count}</label>
+                    <button>-</button>
+                    <input type="number" id="quantity" value="1" min="1">
+                    <button>+</button>
+                </div>
+
+                <button class="add-to-cart">Savatchaga qo'shish</button>
+                <button class="buy-now">1 marta bosishda xarid qiling</button>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

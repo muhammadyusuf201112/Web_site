@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahsulot Kartasi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #e60012; /* Toshiba Red */
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        header nav ul {
+            display: flex;
+            gap: 20px;
+        }
+
+        header nav ul li {
+            list-style: none;
+        }
+
+        header nav ul li a {
+            color: white;
+            font-size: 1rem;
+            text-decoration: none;
+        }
+
+        header nav ul li a:hover {
+            color: #ffd500;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #333;
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: relative;
+            bottom: 0;
+            /* width: 97%; */
+            z-index: 1000;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        footer ul {
+            display: flex;
+            gap: 15px;
+        }
+
+        footer ul li {
+            list-style: none;
+        }
+
+        footer ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        footer ul li a:hover {
+            color: #ffd500;
+        }
+
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card {
+            width: 220px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .card-body {
+            padding: 10px;
+        }
+
+        .discount {
+            background-color: #ff0078;
+            color: white;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 12px;
+        }
+
+        .card-title {
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        .rating {
+            color: #f7b500;
+            font-size: 14px;
+        }
+
+        .price-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .current-price {
+            color: #333;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .installment {
+            background-color: #ffff00;
+            color: black;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .heart-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #999;
+            cursor: pointer;
+        }
+
+        .heart-icon:hover {
+            color: red;
+        }
+
+        .plus-icon {
+            background-color: #eee;
+            border-radius: 50%;
+            padding: 6px;
+            margin-top: 5px;
+            cursor: pointer;
+        }
+
+        .plus-icon:hover {
+            background-color: #ddd;
+        }
+
+
+/* Global Styles */
+/* Global Styles */
+.kar{
+    width: 35px;
+    height: 30px;
+}
+.savat{
+    display: flex;
+    justify-content: space-around;
+    width: 175px;
+    height: 45px;
+    background-color: rgb(248, 248, 248);
+    border: 3px solid rgba(30, 226, 0, 0.637);
+   display: flex;
+   align-items: center;
+   border-radius: 12px;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+    position: absolute;
+    width: 100%;
+}
+
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    width: 300px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card_img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.card h2 {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    color: #333;
+}
+
+.card h3 {
+    font-size: 1rem;
+    color: #666;
+}
+.soni{
+    font-weight: 500;
+ position: relative;
+ top: -12px;
+ left: -16px;
+}
+.py{
+    font-family: Roboto;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 18.75px;
+    text-align: left;
+    padding-left: 8px;
+
+}
+.card .narx {
+    display: block;
+    font-size: 1.2rem;
+    margin-top: 10px;
+    color: #ff4500; /* Orange color for price */
+}
+
+.btu {
+    background-color:#008846;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.btu1 {
+    background-color:#b90000;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btu:hover {
+    background-color:#ffd500 ;
+}
+
+.btu img {
+    width: 26px;
+    height: 26px;
+}
+
+
+
+.ah1{
+    font-size: 20px;
+    text-decoration: none;
+    color: white;
+}
+.ah1:hover{
+ color: rgb(194, 194, 194);
+}
+.ser {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.savat {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border: none;
+    padding: 10px;
+    margin-left: 20px;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+    height: 25px;
+    width: 160px;
+    text-decoration: none;
+}
+
+.savat:hover {
+    background-color:#ffd500 ;
+   transition: 0.5s;
+}
+
+.savat .py {
+    color: #008846;
+    margin-right: 10px;
+}
+
+.savat .soni {
+    color:  #008846;
+    font-weight: bold;
+}
+
+
+.sss {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    width: 100%;
+    background-color:#008846 ;
+height: 800px;
+}
+
+.ss {
+    text-align: left;
+    width: 100%;
+    height: 800px;
+    padding: 70px;
+    margin-top: 52px;
+    display: flex;
+    height: 60vh;margin-left: 90px;
+    justify-content: center;
+    align-items: center;
+}
+.no{
+    width: 550px;
+    height: 500px;
+}
+.ss h1 {
+    font-size: 3.5rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+    width: 690px;
+    margin-right: 30px;
+
+}
+
+.ss p {
+    font-size: 1.5rem;
+    color: #cdcdcd;
+    width: 500px;
+}
+
+.con {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.con input {
+    width: 200px;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.con .tb {
+    background-color: #ff4500;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.con .tb:hover {
+    background-color: #e63c00;
+}
+.admin{
+    background-color:#ffffff;
+     width: 110px;
+      height: 22px;
+      padding: 12px;
+       border-radius: 22px;
+       text-decoration: none;
+       color:#009f3d;display: flex;
+       align-items: center;justify-content: center;
+       font-size: 22px;
+       border: 1.5px solid white;
+       margin-left: -300px;
+       font-size: 25px;
+       text-align: center;
+       margin-right: -150px;
+
+}
+.admin:hover{
+    background-color:#ffd500;
+    transition: 0.5s;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .wrapper {
+        padding: 10px;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .sss {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ss {
+        width: 100%;
+    }
+}
+.menu_savat>div{
+    width: 300px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 22px;
+    margin-left: 22px;
+}
+.menu_savat{
+    display: flex;
+    width: 100%;
+    gap: 24px;
+}
+.product-details {
+            width: 70%;
+        }
+
+        .product-details h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .current-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e91e63;
+            margin-right: 10px;
+        }
+
+        .old-price {
+            font-size: 14px;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .badge {
+            background-color: #ff9800;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+
+        .quantity-control {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-control button {
+            padding: 5px 10px;
+            background-color: #eee;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .quantity-control input {
+            width: 50px;
+            text-align: center;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+        }
+
+        .add-to-cart,
+        .buy-now {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #7c3aed;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .add-to-cart:hover,
+        .buy-now:hover {
+            background-color: #5a1fa2;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">Toshiba</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="http://127.0.0.1:8000/contact/">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Product Cards -->
+    <div class="product-container">
+        {% for mahsulot in mahsulot %}
+        <div class="card">
+            <div style="position: relative;">
+                <img src="{{ mahsulot.image.url }}" alt="{{ mahsulot.name }}">
+                <span class="heart-icon">❤️</span>
+            </div>
+            <div class="card-body">
+                <span class="discount">Arzon narxlar</span>
+                <div class="card-title">{{mahsulot.name}}</div>
+                <!-- <div class="rating">⭐ 4.9</div> -->
+                <div class="price-container">
+                    <div>
+                        <div class="old-price">{{mahsulot.price}} so'm</div>
+                        <div class="current-price">{{mahsulot.is_sale}} so'm</div>
+                    </div>
+                    <!-- <div>
+                        <span class="plus-icon"><img src="./images/images.png" alt=""></span>
+                    </div> -->
+                </div>
+                <div class="installment">{{mahsulot.oyiga_t}} so'm oyiga</div>
+            </div>
+            <a href="{% url 'payment_view' %}" class="add-to-cart">Sotib olish</a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Toshiba. Barcha huquqlar himoyalangan.</p>
+        <ul>
+            <li><a href="http://127.0.0.1:8000/contact/">Contact</a></li>
+        </ul>
+    </footer>
+</body>
+
+</html>
